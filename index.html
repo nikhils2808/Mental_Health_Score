@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindSignal — Mental Health Score Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero-header">
+      <div class="brand-pill">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Student Well-Being Analytics</span>
+      </div>
+      <h1 class="hero-title">Mental Health Score Predictor</h1>
+      <p class="hero-subtitle">
+        Share your daily academic, digital, and lifestyle patterns to estimate your
+        mental well-being score out of 10.
+      </p>
+    </header>
+
+    <main class="workspace-grid">
+      <!-- Left Column: Soft Seafoam & Sky Tinted Form Card -->
+      <section class="form-card" aria-label="Student Well-Being Input Form">
+        <form id="prediction-form" novalidate>
+          <!-- Section 1: Profile -->
+          <div class="form-section">
+            <div class="section-header">
+              <span class="section-step">01</span>
+              <div>
+                <h2 class="section-title">Profile</h2>
+                <p class="section-desc">Basic demographic and academic background</p>
+              </div>
+            </div>
+
+            <div class="field-grid two-col">
+              <div class="field-group">
+                <label class="field-label" for="age">
+                  Age <span class="field-hint">(14–100)</span>
+                </label>
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  class="text-input"
+                  min="14"
+                  max="100"
+                  step="1"
+                  value="21"
+                  placeholder="Enter age"
+                  required
+                />
+                <span class="field-error" id="error-age" role="alert"></span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="country">Country</label>
+                <div class="select-wrapper">
+                  <select id="country" name="country" class="select-input" required>
+                    <option value="" disabled>Select country</option>
+                    <option value="India" selected>India</option>
+                    <option value="USA">USA</option>
+                    <option value="UK">UK</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Turkey">Turkey</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="custom-country-wrap hidden" id="custom-country-wrap">
+                  <input
+                    type="text"
+                    id="custom-country"
+                    class="text-input"
+                    placeholder="Enter country name (optional)"
+                    aria-label="Custom country name"
+                  />
+                </div>
+                <span class="field-error" id="error-country" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label" id="label-gender">Gender</span>
+              <div class="pill-group" role="radiogroup" aria-labelledby="label-gender">
+                <button type="button" class="pill-btn active" data-field="gender" data-value="Male" aria-checked="true" role="radio">
+                  Male
+                </button>
+                <button type="button" class="pill-btn" data-field="gender" data-value="Female" aria-checked="false" role="radio">
+                  Female
+                </button>
+              </div>
+              <input type="hidden" id="gender" name="gender" value="Male" />
+              <span class="field-error" id="error-gender" role="alert"></span>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label" id="label-academic">Academic Level</span>
+              <div class="pill-group three-up" role="radiogroup" aria-labelledby="label-academic">
+                <button type="button" class="pill-btn" data-field="academic_level" data-value="High School" aria-checked="false" role="radio">
+                  High School
+                </button>
+                <button type="button" class="pill-btn active" data-field="academic_level" data-value="Undergraduate" aria-checked="true" role="radio">
+                  Undergraduate
+                </button>
+                <button type="button" class="pill-btn" data-field="academic_level" data-value="Graduate" aria-checked="false" role="radio">
+                  Graduate
+                </button>
+              </div>
+              <input type="hidden" id="academic_level" name="academic_level" value="Undergraduate" />
+              <span class="field-error" id="error-academic_level" role="alert"></span>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 2: Academic & Digital Habits -->
+          <div class="form-section">
+            <div class="section-header">
+              <span class="section-step">02</span>
+              <div>
+                <h2 class="section-title">Academic &amp; Digital Habits</h2>
+                <p class="section-desc">Screen usage, platform preference, and study time</p>
+              </div>
+            </div>
+
+            <div class="field-grid two-col">
+              <div class="field-group">
+                <label class="field-label" for="most_used_platform">Most Used Platform</label>
+                <div class="select-wrapper">
+                  <select id="most_used_platform" name="most_used_platform" class="select-input" required>
+                    <option value="" disabled>Select platform</option>
+                    <option value="Instagram" selected>Instagram</option>
+                    <option value="YouTube">YouTube</option>
+                    <option value="WhatsApp">WhatsApp</option>
+                    <option value="TikTok">TikTok</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Snapchat">Snapchat</option>
+                    <option value="WeChat">WeChat</option>
+                    <option value="LINE">LINE</option>
+                    <option value="KakaoTalk">KakaoTalk</option>
+                    <option value="VKontakte">VKontakte</option>
+                  </select>
+                </div>
+                <span class="field-error" id="error-most_used_platform" role="alert"></span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="daily_unlocks">
+                  Daily Phone Unlocks <span class="field-hint">(count)</span>
+                </label>
+                <input
+                  type="number"
+                  id="daily_unlocks"
+                  name="daily_unlocks"
+                  class="text-input zero-clearable"
+                  min="0"
+                  step="1"
+                  value="45"
+                  placeholder="0"
+                  required
+                />
+                <span class="field-error" id="error-daily_unlocks" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <div class="purpose-label-row">
+                <span class="field-label" id="label-purpose">Primary Purpose of Use</span>
+                <span class="purpose-guide" id="purpose-guide">Typical for Instagram: Entertainment or Networking</span>
+              </div>
+              <div class="pill-group four-up" role="radiogroup" aria-labelledby="label-purpose">
+                <button type="button" class="pill-btn active" data-field="purpose_of_use" data-value="Education" aria-checked="true" role="radio">
+                  Education
+                </button>
+                <button type="button" class="pill-btn suggested" data-field="purpose_of_use" data-value="Entertainment" aria-checked="false" role="radio">
+                  Entertainment
+                </button>
+                <button type="button" class="pill-btn" data-field="purpose_of_use" data-value="Networking" aria-checked="false" role="radio">
+                  Networking
+                </button>
+                <button type="button" class="pill-btn" data-field="purpose_of_use" data-value="News" aria-checked="false" role="radio">
+                  News
+                </button>
+              </div>
+              <input type="hidden" id="purpose_of_use" name="purpose_of_use" value="Education" />
+              <span class="field-error" id="error-purpose_of_use" role="alert"></span>
+            </div>
+
+            <div class="field-grid two-col">
+              <div class="field-group">
+                <label class="field-label" for="avg_daily_usage_hours">
+                  Avg. Daily Screen Usage <span class="field-hint">(hrs)</span>
+                </label>
+                <div class="range-input-row">
+                  <input
+                    type="range"
+                    id="range-avg_daily_usage_hours"
+                    class="range-slider"
+                    min="0"
+                    max="24"
+                    step="0.5"
+                    value="4.5"
+                    aria-label="Average daily usage hours slider"
+                  />
+                  <input
+                    type="number"
+                    id="avg_daily_usage_hours"
+                    name="avg_daily_usage_hours"
+                    class="text-input compact-num zero-clearable"
+                    min="0"
+                    max="24"
+                    step="0.1"
+                    value="4.5"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+                <span class="field-error" id="error-avg_daily_usage_hours" role="alert"></span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="study_hours">
+                  Daily Study Hours <span class="field-hint">(hrs)</span>
+                </label>
+                <div class="range-input-row">
+                  <input
+                    type="range"
+                    id="range-study_hours"
+                    class="range-slider"
+                    min="0"
+                    max="24"
+                    step="0.5"
+                    value="5"
+                    aria-label="Daily study hours slider"
+                  />
+                  <input
+                    type="number"
+                    id="study_hours"
+                    name="study_hours"
+                    class="text-input compact-num zero-clearable"
+                    min="0"
+                    max="24"
+                    step="0.1"
+                    value="5"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+                <span class="field-error" id="error-study_hours" role="alert"></span>
+              </div>
+            </div>
+          </div>
+
+          <hr class="section-divider" />
+
+          <!-- Section 3: Lifestyle & Stress -->
+          <div class="form-section">
+            <div class="section-header">
+              <span class="section-step">03</span>
+              <div>
+                <h2 class="section-title">Lifestyle &amp; Stress</h2>
+                <p class="section-desc">Movement, nightly rest, and perceived stress</p>
+              </div>
+            </div>
+
+            <div class="field-grid two-col">
+              <div class="field-group">
+                <label class="field-label" for="physical_activity_hours">
+                  Physical Activity <span class="field-hint">(hrs)</span>
+                </label>
+                <div class="range-input-row">
+                  <input
+                    type="range"
+                    id="range-physical_activity_hours"
+                    class="range-slider"
+                    min="0"
+                    max="24"
+                    step="0.5"
+                    value="1"
+                    aria-label="Physical activity hours slider"
+                  />
+                  <input
+                    type="number"
+                    id="physical_activity_hours"
+                    name="physical_activity_hours"
+                    class="text-input compact-num zero-clearable"
+                    min="0"
+                    max="24"
+                    step="0.1"
+                    value="1"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+                <span class="field-error" id="error-physical_activity_hours" role="alert"></span>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="sleep_hours_per_night">
+                  Sleep Per Night <span class="field-hint">(hrs)</span>
+                </label>
+                <div class="range-input-row">
+                  <input
+                    type="range"
+                    id="range-sleep_hours_per_night"
+                    class="range-slider"
+                    min="0"
+                    max="24"
+                    step="0.5"
+                    value="7"
+                    aria-label="Sleep hours per night slider"
+                  />
+                  <input
+                    type="number"
+                    id="sleep_hours_per_night"
+                    name="sleep_hours_per_night"
+                    class="text-input compact-num zero-clearable"
+                    min="0"
+                    max="24"
+                    step="0.1"
+                    value="7"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+                <span class="field-error" id="error-sleep_hours_per_night" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="field-group">
+              <span class="field-label" id="label-stress">Stress Level</span>
+              <div class="pill-group four-up" role="radiogroup" aria-labelledby="label-stress">
+                <button type="button" class="pill-btn" data-field="stress_level" data-value="Low" aria-checked="false" role="radio">
+                  Low
+                </button>
+                <button type="button" class="pill-btn active" data-field="stress_level" data-value="Medium" aria-checked="true" role="radio">
+                  Medium
+                </button>
+                <button type="button" class="pill-btn" data-field="stress_level" data-value="High" aria-checked="false" role="radio">
+                  High
+                </button>
+                <button type="button" class="pill-btn" data-field="stress_level" data-value="Very High" aria-checked="false" role="radio">
+                  Very High
+                </button>
+              </div>
+              <input type="hidden" id="stress_level" name="stress_level" value="Medium" />
+              <span class="field-error" id="error-stress_level" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="submit-row">
+            <button type="submit" id="predict-btn" class="signal-btn">
+              <span class="btn-spinner hidden" id="btn-spinner" aria-hidden="true"></span>
+              <span class="btn-icon" id="btn-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M2 12h3l2.5-6 4 12 3.5-8 2 2h5" />
+                </svg>
+              </span>
+              <span id="btn-text">Read My Signal</span>
+            </button>
+            <button type="button" id="reset-btn" class="reset-btn">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: Distinct Warm Lavender & Rose Prediction Dashboard (Untouched) -->
+      <aside class="dashboard-card" aria-label="Prediction Result Dashboard" aria-live="polite">
+        <div class="dashboard-top">
+          <span class="status-badge" id="status-badge">
+            <span class="status-dot"></span>
+            <span id="status-text">Ready to Analyze</span>
+          </span>
+          <span class="dashboard-label">Well-Being Signal</span>
+        </div>
+
+        <!-- Visual Score Gauge -->
+        <div class="gauge-container">
+          <svg class="score-gauge" viewBox="0 0 240 150" role="img" aria-label="Mental Health Score Gauge">
+            <defs>
+              <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#f43f5e" id="grad-start" />
+                <stop offset="50%" stop-color="#f59e0b" id="grad-mid" />
+                <stop offset="100%" stop-color="#10b981" id="grad-end" />
+              </linearGradient>
+            </defs>
+            <!-- Background Arc -->
+            <path
+              class="gauge-track"
+              d="M 25 130 A 95 95 0 0 1 215 130"
+              fill="none"
+              stroke-width="16"
+              stroke-linecap="round"
+            />
+            <!-- Active Progress Arc -->
+            <path
+              id="gauge-arc"
+              class="gauge-fill"
+              d="M 25 130 A 95 95 0 0 1 215 130"
+              fill="none"
+              stroke="url(#gauge-gradient)"
+              stroke-width="16"
+              stroke-linecap="round"
+              stroke-dasharray="298.45"
+              stroke-dashoffset="298.45"
+            />
+          </svg>
+          <div class="gauge-readout">
+            <div class="score-number" id="score-number">--</div>
+            <div class="score-scale">out of 10</div>
+          </div>
+          <div class="gauge-ticks" aria-hidden="true">
+            <span>0</span>
+            <span>5</span>
+            <span>10</span>
+          </div>
+        </div>
+
+        <!-- API Error Alert -->
+        <div class="api-error-box hidden" id="api-error-box" role="alert">
+          <strong class="error-title">Unable to read signal</strong>
+          <p class="error-message" id="api-error-message"></p>
+        </div>
+
+        <!-- Interpretation Card -->
+        <div class="interpretation-box" id="interpretation-box">
+          <div class="interp-header">
+            <span class="interp-tag" id="interp-tag">Awaiting Input</span>
+          </div>
+          <h3 class="interp-heading" id="interp-heading">Your well-being signal will appear here</h3>
+          <p class="interp-body" id="interp-body">
+            Complete the three sections on the left and click <strong>Read My Signal</strong> to
+            receive a real-time prediction from your FastAPI machine learning model.
+          </p>
+        </div>
+
+        <!-- Snapshot Metrics -->
+        <div class="snapshot-grid">
+          <div class="snapshot-item">
+            <span class="snap-label">Screen Time</span>
+            <span class="snap-value" id="snap-screen">4.5 hrs</span>
+          </div>
+          <div class="snapshot-item">
+            <span class="snap-label">Sleep</span>
+            <span class="snap-value" id="snap-sleep">7.0 hrs</span>
+          </div>
+          <div class="snapshot-item">
+            <span class="snap-label">Study</span>
+            <span class="snap-value" id="snap-study">5.0 hrs</span>
+          </div>
+          <div class="snapshot-item">
+            <span class="snap-label">Activity</span>
+            <span class="snap-value" id="snap-activity">1.0 hrs</span>
+          </div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
