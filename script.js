@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const PREDICT_API_URL = 'https://mental-health-score-2-algh.onrender.com';
+  const PREDICT_API_URL = 'https://mental-health-score-2-algh.onrender.com/predict';
   const GAUGE_ARC_LENGTH = 298.45; // Matches SVG semi-circle path length (pi * 95)
 
   const PLATFORM_PURPOSE_MAP = {
