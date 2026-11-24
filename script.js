@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const PREDICT_API_URL = 'http://127.0.0.1:8000/predict';
+  const PREDICT_API_URL = 'https://mental-health-score-zryj.onrender.com/';
   const GAUGE_ARC_LENGTH = 298.45; // Matches SVG semi-circle path length (pi * 95)
 
   const PLATFORM_PURPOSE_MAP = {
